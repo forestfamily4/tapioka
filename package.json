@@ -1,0 +1,19 @@
+{
+  "name": "tapioka",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "deploy": "npm run start && vercel --prod"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bing-chat": "^0.2.1",
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  }
+}
