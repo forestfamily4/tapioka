@@ -10,9 +10,10 @@ app.listen(8080)
 app.get("/", (req, res) => {
   res.send('botisok')
 })
-app.post("/cat", (req, res) => {
+app.post("/cat", async (req, res) => {
   if (req.body.secret == process.env.SECRET) {
-    client.channels.fetch("959812406140346408").send(req.body.content)
+    const c = await client.channels.fetch("959812406140346408")
+    c.send(req.body.content)
     res.send("ok")
   }
   else {
