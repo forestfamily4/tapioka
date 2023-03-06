@@ -5,16 +5,17 @@ const client = new Client({
 });
 const express = require("express");
 const app = express()
-app.use(express.json()); 
+app.use(express.json());
 app.listen(8080)
 app.get("/", (req, res) => {
   res.send('botisok')
 })
-app.post("/cat",(req,res)=>{
-  if(req.body.secret==process.env.SECRET){    client.channels.cache.get("959812406140346408").send(req.body.content)
+app.post("/cat", (req, res) => {
+  if (req.body.secret == process.env.SECRET) {
+    client.channels.fetch("959812406140346408").send(req.body.content)
     res.send("ok")
   }
-  else{
+  else {
     res.send("no")
   }
 })
