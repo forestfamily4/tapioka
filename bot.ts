@@ -3,11 +3,13 @@ import { config } from "./lib/config";
 import { Client, GatewayIntentBits } from "discord.js";
 import { commandManager } from "./manager/commands";
 import { eventManager } from "./manager/events";
+import { Server } from "./lib/server";
 
 export class Bot {
     private commandManager: commandManager
     private eventManager: eventManager
     private client: Client
+    private server:Server;
 
     constructor() {
         this.client = new Client({
@@ -18,5 +20,6 @@ export class Bot {
         this.eventManager = new eventManager(this.client)
         
         this.client.login(config.token)
+        this.server=new Server().start(3030)
     }
 }

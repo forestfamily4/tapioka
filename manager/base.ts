@@ -13,7 +13,8 @@ export interface commandHandler extends handler {
 }
 
 export interface eventHandler<T extends keyof ClientEvents> extends handler {
-    exec: ( client: Client,...args: ClientEvents[T]) => void | Promise<void>;
+    name: T,
+    exec: (client: Client, ...args: ClientEvents[T]) => void | Promise<void>;
 }
 
 export interface slashCommandHandler extends handler {
