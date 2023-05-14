@@ -1,6 +1,6 @@
 import { Client, ClientEvents, EmbedBuilder, Message } from "discord.js";
-import { eventHandler } from "../manager/base";
-import { config } from "../lib/config";
+import { eventHandler } from "../manager/base.js";
+import { config } from "../lib/config.js";
 import { BingChat, ChatMessage } from "bing-chat";
 
 

@@ -1,4 +1,4 @@
-import { commandHandler } from '../manager/base';
+import { commandHandler } from '../manager/base.js';
 export const handler: commandHandler = {
     name: "reload",
     description: "reload",

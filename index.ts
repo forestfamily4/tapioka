@@ -1,3 +1,8 @@
-import { Bot } from "./bot";
+import { Bot } from "./bot.js";
 
-new Bot();
+const main=async ()=>{
+    const bot=new Bot()
+    bot.reload()
+}
+
+main()

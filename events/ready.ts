@@ -1,5 +1,5 @@
 import { Client } from "discord.js"
-import { eventHandler } from "../manager/base"
+import { eventHandler } from "../manager/base.js"
 
 export const handler: eventHandler<"ready"> = {
     name: "ready",

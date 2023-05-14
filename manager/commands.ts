@@ -1,7 +1,7 @@
 import { Client } from "discord.js";
-import { baseManager, commandHandler } from "./base";
-import { config } from "../lib/config";
-import { Bot } from "../bot";
+import { baseManager, commandHandler } from "./base.js";
+import { config } from "../lib/config.js";
+import { Bot } from "../bot.js";
 
 
 export class commandManager extends baseManager<commandHandler>{

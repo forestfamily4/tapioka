@@ -1,9 +1,8 @@
-import { baseManager } from "./manager/base";
-import { config } from "./lib/config";
+import { config } from "./lib/config.js";
 import { Client, GatewayIntentBits } from "discord.js";
-import { commandManager } from "./manager/commands";
-import { eventManager } from "./manager/events";
-import { Server } from "./lib/server";
+import { commandManager } from "./manager/commands.js";
+import { eventManager } from "./manager/events.js";
+import { Server } from "./lib/server.js";
 
 export class Bot {
     private commandManager: commandManager
@@ -20,12 +19,14 @@ export class Bot {
         this.commandManager = new commandManager(this)
         this.eventManager = new eventManager(this)
 
-        this.client.login(config.token)
         this.server = new Server().start(3030)
     }
 
-    public async reload(){
+    public async reload(){        
+        this.client.login(config.token)
         this.commandManager.reload()
         this.eventManager.reload()
     }
+
+    
 }

@@ -1,7 +1,7 @@
 import { Client, ClientEvents, Collection, Message } from "discord.js"
 import { readdirSync, statSync } from "fs"
-import { config } from "../lib/config"
-import { Bot } from "../bot"
+import { config } from "../lib/config.js"
+import { Bot } from "../bot.js"
 export interface handler {
     name: string
     exec: Function
@@ -29,27 +29,28 @@ export abstract class baseManager<T extends handler> extends Collection<string, 
     constructor(private path: string, readonly client: Client, readonly bot: Bot) {
         super()
         this.setPath()
-        this.reload()
     }
 
-    abstract load(): void
+    abstract load(): void | Promise<void>
 
     private setPath() {
         this.path = `${config.isDev ? "dist" : "src"}/${this.path}`
     }
 
-    private loadModule() {
-        readdirSync(this.path).forEach(file => {
+    private async loadModule() {
+        const a = readdirSync(this.path)
+        for (let i = 0; i < a.length; i++) {
+            const file = a[i]
             if (!statSync(`${this.path}/${file}`).isFile()) { return }
-            const handler: T = require(`${process.cwd()}/${this.path}/${file}`).handler
+            const handler: T = (await import(`../../${this.path}/${file}`)).handler
             console.log(`Loaded ${this.constructor.name} ${handler.name}`)
             this.set(handler.name, handler)
-        })
+        }
     }
 
     public async reload() {
-        this.loadModule()
-        this.load()
+        await this.loadModule()
+        await this.load()
     }
 }
 

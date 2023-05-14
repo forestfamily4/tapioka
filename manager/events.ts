@@ -1,6 +1,6 @@
 import { Client, ClientEvents } from "discord.js"
-import { baseManager, eventHandler, handler } from "./base"
-import { Bot } from "../bot"
+import { baseManager, eventHandler, handler } from "./base.js"
+import { Bot } from "../bot.js"
 
 export class eventManager extends baseManager<handler>{
     constructor(bot: Bot) {

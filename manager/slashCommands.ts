@@ -1,6 +1,6 @@
 import { Client } from "discord.js";
-import { baseManager, slashCommandHandler } from "./base";
-import { Bot } from "../bot";
+import { baseManager, slashCommandHandler } from "./base.js";
+import { Bot } from "../bot.js";
 
 export class slashCommandManager extends baseManager<slashCommandHandler>{
     constructor(client: Client,bot:Bot) {
