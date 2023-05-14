@@ -1,9 +1,10 @@
 import { Client } from "discord.js";
 import { baseManager, slashCommandHandler } from "./base";
+import { Bot } from "../bot";
 
 export class slashCommandManager extends baseManager<slashCommandHandler>{
-    constructor(client: Client) {
-        super("slashCommands", client)
+    constructor(client: Client,bot:Bot) {
+        super("slashCommands", client,bot)
     }
 
     load(): void {

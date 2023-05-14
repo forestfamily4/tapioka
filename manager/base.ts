@@ -1,20 +1,24 @@
 import { Client, ClientEvents, Collection, Message } from "discord.js"
-import { readdir, statSync } from "fs"
+import { readdirSync, statSync } from "fs"
 import { config } from "../lib/config"
+import { Bot } from "../bot"
 export interface handler {
     name: string
     exec: Function
+
 }
+export type Authority = "admin" | "everyone"
 
 export interface commandHandler extends handler {
     description: string
     aliases: string[]
-    exec: (message: Message, args: string[], client: Client) => void | Promise<void>
+    authority: Authority
+    exec: (bot: Bot, message: Message, args: string[],) => void | Promise<void>
 }
 
 export interface eventHandler<T extends keyof ClientEvents> extends handler {
     name: T,
-    exec: (client: Client, ...args: ClientEvents[T]) => void | Promise<void>;
+    exec: (bot: Bot, ...args: ClientEvents[T]) => void | Promise<void>;
 }
 
 export interface slashCommandHandler extends handler {
@@ -22,11 +26,10 @@ export interface slashCommandHandler extends handler {
 }
 
 export abstract class baseManager<T extends handler> extends Collection<string, T>{
-    constructor(private path: string, readonly client: Client) {
+    constructor(private path: string, readonly client: Client, readonly bot: Bot) {
         super()
         this.setPath()
-        this.loadModule()
-        this.load()
+        this.reload()
     }
 
     abstract load(): void
@@ -36,14 +39,17 @@ export abstract class baseManager<T extends handler> extends Collection<string, 
     }
 
     private loadModule() {
-        readdir(this.path, (_, files) => {
-            files.forEach(file => {
-                if (!statSync(`${this.path}/${file}`).isFile()) { return }
-                const handler: T = require(`${process.cwd()}/${this.path}/${file}`).handler
-                console.log(`Loaded ${this.constructor.name} ${handler.name}`)
-                this.set(handler.name, handler)
-            })
+        readdirSync(this.path).forEach(file => {
+            if (!statSync(`${this.path}/${file}`).isFile()) { return }
+            const handler: T = require(`${process.cwd()}/${this.path}/${file}`).handler
+            console.log(`Loaded ${this.constructor.name} ${handler.name}`)
+            this.set(handler.name, handler)
         })
+    }
+
+    public async reload() {
+        this.loadModule()
+        this.load()
     }
 }
 

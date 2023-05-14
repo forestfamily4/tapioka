@@ -1,15 +1,16 @@
 import { Client, ClientEvents } from "discord.js"
-import { baseManager, handler } from "./base"
+import { baseManager, eventHandler, handler } from "./base"
+import { Bot } from "../bot"
 
 export class eventManager extends baseManager<handler>{
-    constructor(client: Client) {
-        super("events", client)
+    constructor(bot: Bot) {
+        super("events", bot.client, bot)
     }
 
     load(): void {
-        this.forEach(handler => {            
+        this.forEach(handler => {
             this.client.on(handler.name, (...args) => {
-                handler.exec(...args,this.client)
+                handler.exec(this.bot, ...args)
             })
         })
     }

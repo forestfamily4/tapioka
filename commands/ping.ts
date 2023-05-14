@@ -4,7 +4,8 @@ export const handler: commandHandler = {
     name: "ping",
     description: "ping",
     aliases: ["pong"],
-    exec(message, args) {
-        message.reply("pong!botbotより優秀dayo")
+    authority: "everyone",
+    exec(bot, message, args) {
+        message.reply(`ping: ${Date.now() - message.createdTimestamp}ms\nbotbotは最高にゴミです。`)
     },
 }

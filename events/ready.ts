@@ -3,7 +3,7 @@ import { eventHandler } from "../manager/base"
 
 export const handler: eventHandler<"ready"> = {
     name: "ready",
-    exec: (client:Client) => {
+    exec: (bot,client) => {
         console.log(`ready as ${client.user?.tag}`)
     }
 }
