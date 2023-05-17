@@ -1,1 +1,1 @@
-run="npm start"
+run="npx node dist/index.js"
