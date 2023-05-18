@@ -1,4 +1,4 @@
-import { Client, ClientEvents, Collection, Message } from "discord.js"
+import { ButtonInteraction, CacheType, Client, ClientEvents, Collection, Interaction, Message } from "discord.js"
 import { readdirSync, statSync } from "fs"
 import { config } from "../lib/config.js"
 import { Bot } from "../bot.js"
@@ -23,6 +23,10 @@ export interface eventHandler<T extends keyof ClientEvents> extends handler {
 
 export interface slashCommandHandler extends handler {
     exec: (interaction: Message, args: string[]) => void | Promise<void>
+}
+
+export interface buttonHandler extends handler {
+    exec: (bot: Bot, args: Array<any>,interaction:ButtonInteraction<CacheType>) => void | Promise<void>
 }
 
 export abstract class baseManager<T extends handler> extends Collection<string, T>{
