@@ -1,1 +1,1 @@
-run="npx node dist/index.js"
+run="npx tsc&&npx node dist/index.js"
