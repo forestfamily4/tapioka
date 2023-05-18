@@ -12,6 +12,6 @@ export const handler: buttonHandler = {
         if (!text) { return; }
         const a = await interaction.deferReply();
         await askBing(text, interaction.guildId, bot.client);
-        a.delete()
+        a.edit("これについて回答します。")
     }
 }
