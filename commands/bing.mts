@@ -33,7 +33,7 @@ type BingProps = {
     conversationId: string
 }
 
-export const BingChannelCollection = new Collection<string, BingProps>()
+export const BingChannelCollection = new Map<string, BingProps>()
 
 export async function startBing(channelId: string, guildId: string, client: Client) {
     const a = await client.channels.fetch(channelId)

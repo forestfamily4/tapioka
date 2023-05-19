@@ -1,3 +1,4 @@
+import bodyParser from "body-parser";
 import express from "express";
 
 
@@ -6,8 +7,7 @@ export class Server {
     private app: express.Express = express()
 
     public start(port: number = 3000): Server {
-        this.app.use(express.json())
-        this.app.use(express.urlencoded({ extended: true }));
+        this.app.use(bodyParser.json())
         this.app.listen(port, () => {
             console.log("server started");
         })
