@@ -13,6 +13,6 @@ export const config: config = {
     token: process.env['TOKEN'] ?? '',
     prefix: "!",
     bing_token: process.env['BING_TOKEN'] ?? '',
-    isDev: process.env['NODE_ENV'] !== 'production',
+    isDev: true,
     owner: ["894380953718390785","835036688849043468"]
 }
