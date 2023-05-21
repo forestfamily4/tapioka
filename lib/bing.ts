@@ -561,9 +561,7 @@ export class BingChat {
       if (res.data) {
         return res.data
       } else {
-        throw new Error(
-          `unexpected HTTP error createConversation ${res.status}: ${res.statusText}`
-        )
+        console.error(`unexpected HTTP error createConversation ${res.status}: ${res.statusText}`);
       }
     })
   }
