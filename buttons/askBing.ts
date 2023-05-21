@@ -1,6 +1,6 @@
 import { ButtonComponent } from "discord.js";
-import { askBing } from "../commands/bing.mjs";
 import { buttonHandler, eventHandler } from "../manager/base.js";
+import { askBing } from "../lib/bingHandler";
 
 export const handler: buttonHandler = {
     name: "askBing",
@@ -12,6 +12,6 @@ export const handler: buttonHandler = {
         if (!text) { return; }
         const a = await interaction.deferReply();
         await askBing(text, interaction.guildId, bot.client);
-        a.edit("これについて回答します。")
+        a.edit(text)
     }
 }

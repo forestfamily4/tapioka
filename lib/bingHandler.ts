@@ -1,32 +1,8 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, Client, Collection, EmbedBuilder, TextChannel } from "discord.js"
-import { commandHandler } from "../manager/base.js"
-import { BingChat } from "bing-chat"
-import { config } from "../lib/config.js";
-import { Bot } from "bot.js";
-import { bot } from "index.js";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, Client, EmbedBuilder, TextChannel } from "discord.js"
+import { BingChat } from "./bing"
+import { config } from "./config"
 
-export const handler: commandHandler = {
-    name: "bingchat",
-    description:
-        `
-    Bingのチャットを開始します。
-    resetでリセットできます。
-    stopで応答を停止できます。
-    #をつけるとコメントとみなされます。
-    `,
-    aliases: ["bing"],
-    authority: "everyone",
-    exec(bot, message, args) {
-        if (message.channel.type !== ChannelType.GuildText) {
-            return;
-        }
-        startBing(message.channel.id, message.guildId, bot.client)
-        message.reply("Bingのチャットを開始しました。")
-    },
-}
-
-
-let BingApi: BingChat = new BingChat({ cookie: config.bing_token })
+export let BingApi: BingChat = new BingChat({ cookie: config.bing_token })
 type BingProps = {
     pending: boolean,
     channel: TextChannel,
@@ -39,6 +15,9 @@ export async function startBing(channelId: string, guildId: string, client: Clie
     const a = await client.channels.fetch(channelId)
     if (a.type !== ChannelType.GuildText) {
         return;
+    }
+    if(!a){
+        return
     }
     BingChannelCollection.set(guildId, {
         pending: false,

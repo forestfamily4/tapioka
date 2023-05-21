@@ -12,7 +12,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bing-chat": "^0.2.3",
     "body-parser": "^1.20.2",
     "discord.js": "^14.9.0",
     "dotenv": "^16.0.3",

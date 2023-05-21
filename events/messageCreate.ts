@@ -1,5 +1,5 @@
+import { BingChannelCollection, askBing } from "../lib/bingHandler";
 import { eventHandler } from "../manager/base.js";
-import { BingChannelCollection, askBing } from "../commands/bing.mjs";
 
 export const handler: eventHandler<"messageCreate"> = {
   name: "messageCreate",
