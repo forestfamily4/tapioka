@@ -70,7 +70,7 @@ export async function askBing(text: string, guildId: string, client: Client) {
         return channel().send("Bingの会話が終了しました。<:kyouhu:1075997185923108874>");
     }
 
-    const timeout = 20000;
+    const timeout = 40000;
     const startTime = Date.now();
 
     while (Res.text == "" || Res.text == undefined) {
