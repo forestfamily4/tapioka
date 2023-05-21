@@ -2,7 +2,7 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, Client, Embe
 import { BingChat } from "./bing"
 import { config } from "./config"
 
-export let BingApi: BingChat = new BingChat({ cookie: config.bing_token })
+export let BingApi: BingChat = new BingChat({ cookie: config.bing_token, debug: true })
 type BingProps = {
     pending: boolean,
     channel: TextChannel,
@@ -16,7 +16,7 @@ export async function startBing(channelId: string, guildId: string, client: Clie
     if (a.type !== ChannelType.GuildText) {
         return;
     }
-    if(!a){
+    if (!a) {
         return
     }
     BingChannelCollection.set(guildId, {
@@ -69,7 +69,7 @@ export async function askBing(text: string, guildId: string, client: Client) {
         return channel().send("Bingの会話が終了しました。<:kyouhu:1075997185923108874>");
     }
 
-    const timeout = 20000; 
+    const timeout = 20000;
     const startTime = Date.now();
 
     while (Res.text == "" || Res.text == undefined) {
@@ -81,7 +81,7 @@ export async function askBing(text: string, guildId: string, client: Client) {
                 channel: channel(),
                 conversationId: conversationId()
             })
-            return channel().send("タイムアウトしました。<:kyouhu:1075997185923108874>");            
+            return channel().send("タイムアウトしました。<:kyouhu:1075997185923108874>");
         }
 
         await new Promise(resolve => setTimeout(resolve, 1000)); // wait 1 second before trying again
@@ -96,10 +96,10 @@ export async function askBing(text: string, guildId: string, client: Client) {
     if (suggestions) {
         for (let i = 0; i < suggestions.length; i++) {
             const suggestion = suggestions[i]
-            const text=suggestion.text
+            const text = suggestion.text
             const button = new ButtonBuilder()
                 .setCustomId(`askBing,${i}`)
-                .setLabel(text.length>79?text.slice(0,79)+"...":text)
+                .setLabel(text.length > 79 ? text.slice(0, 79) + "..." : text)
                 .setStyle(ButtonStyle.Primary);
             row.addComponents(button);
         }

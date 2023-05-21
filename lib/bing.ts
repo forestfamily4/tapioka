@@ -1,6 +1,7 @@
 import crypto from 'node:crypto'
 
 import WebSocket from 'ws'
+import post from "axios"
 
 export type Author = 'user' | 'bot'
 
@@ -525,7 +526,7 @@ export class BingChat {
       ? this._cookie
       : `_U=${this._cookie}`
 
-    return fetch('https://www.bing.com/turing/conversation/create', {
+    return post('https://www.bing.com/turing/conversation/create', {
       headers: {
         accept: 'application/json',
         'accept-language': 'en-US,en;q=0.9',
@@ -550,15 +551,15 @@ export class BingChat {
           'azsdk-js-api-client-factory/1.0.0-beta.1 core-rest-pipeline/1.10.0 OS/MacIntel',
         cookie
       },
-      referrer: 'https://www.bing.com/search',
-      referrerPolicy: 'origin-when-cross-origin',
-      body: null,
+     // referrer: 'https://www.bing.com/search',
+     // referrerPolicy: 'origin-when-cross-origin',
+     // body: null,
       method: 'GET',
-      mode: 'cors',
-      credentials: 'include'
+     // mode: 'cors',
+    //  credentials: 'include'
     }).then((res) => {
-      if (res.ok) {
-        return res.json()
+      if (res.data) {
+        return res.data
       } else {
         throw new Error(
           `unexpected HTTP error createConversation ${res.status}: ${res.statusText}`
