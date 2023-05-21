@@ -19,10 +19,11 @@ export async function startBing(channelId: string, guildId: string, client: Clie
     if (!a) {
         return
     }
+    const c=await BingApi.createConversation()
     BingChannelCollection.set(guildId, {
         pending: false,
         channel: a,
-        conversationId: (await BingApi.createConversation()).conversationId
+        conversationId: c.conversationId
     })
 }
 
