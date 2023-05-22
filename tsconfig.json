@@ -1,12 +1,12 @@
 {
 	"compilerOptions": {
 		"target": "es2022",
+		"module":"NodeNext",
 		"allowJs": true,
 		"skipLibCheck": true,
 		"strict": false,
 		"forceConsistentCasingInFileNames": true,
 		"esModuleInterop": true,
-		"module": "CommonJS",
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"baseUrl": ".",

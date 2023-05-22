@@ -6,7 +6,8 @@ type config = {
     prefix: string,
     bing_token: string,
     isDev: boolean,
-    owner: string[]
+    owner: string[],
+    bard_token:string
 }
 
 export const config: config = {
@@ -14,5 +15,6 @@ export const config: config = {
     prefix: "!",
     bing_token: process.env['BING_TOKEN'] ?? '',
     isDev: true,
-    owner: ["894380953718390785","835036688849043468"]
+    owner: ["894380953718390785","835036688849043468"],
+    bard_token:process.env['BARD_TOKEN'] ?? ''
 }

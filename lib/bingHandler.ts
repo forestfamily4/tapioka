@@ -2,7 +2,7 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, Client, Embe
 import { BingChat } from "./bing"
 import { config } from "./config"
 
-export let BingApi: BingChat = new BingChat({ cookie: config.bing_token, debug: true })
+const BingApi: BingChat = new BingChat({ cookie: config.bing_token, debug: true })
 type BingProps = {
     pending: boolean,
     channel: TextChannel,

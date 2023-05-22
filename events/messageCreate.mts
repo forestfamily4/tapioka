@@ -1,4 +1,5 @@
-import { BingChannelCollection, askBing } from "../lib/bingHandler";
+import { BardChannelCollection, askBard } from "../lib/bardHandler.mjs";
+import { BingChannelCollection, askBing } from "../lib/bingHandler.js";
 import { eventHandler } from "../manager/base.js";
 
 export const handler: eventHandler<"messageCreate"> = {
@@ -22,6 +23,20 @@ export const handler: eventHandler<"messageCreate"> = {
         }
         else {
           askBing(message.content, message.guildId, bot.client)
+        }
+        return;
+      }
+
+      if (BardChannelCollection.has(message.guildId)) {
+        const data = BardChannelCollection.get(message.guildId)
+        if(message.channelId!==data.channel.id){
+          return
+        }
+        if (data.pending) {
+          message.reply("Bardのチャットは応答中です。")
+        }
+        else {
+          askBard(message.content, message.guildId, bot.client)
         }
         return;
       }
