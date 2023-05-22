@@ -2,6 +2,7 @@
 import { Bard } from "googlebard";
 import { config } from "./config.js";
 import { ChannelType, Client, TextChannel } from "discord.js";
+import { sendLot } from "./sendLot.js";
 
 
 const BardApi = new Bard(config.bard_token)
@@ -86,7 +87,7 @@ export async function askBard(text: string, guildId: string, client: Client) {
     }
 
     const content = `${(Res == "" || Res == undefined) ? "もう一回送信してください<:kyouhu:1075997185923108874>" : Res}`
-    await channel().send(content)
+    await sendLot(channel(), content)
 
     BardChannelCollection.set(guildId, {
         pending: false,

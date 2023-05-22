@@ -115,8 +115,6 @@ export async function askBing(text: string, guildId: string, client: Client) {
             embeds: [mainMes]
         })
     }
-
-
     Res.detail?.sourceAttributions?.forEach((a: any) => {
         const ee = new EmbedBuilder()
         ee.setTitle(a.providerDisplayName)
