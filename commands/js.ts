@@ -11,7 +11,7 @@ export const handler: commandHandler = {
         try {
             const a = await eval(message.content.slice(4))
             const result = inspect(a)
-            if (result.length > 3500) {
+            if (result.length > 2000) {
                 await message.channel.send({
                     files: [
                         new AttachmentBuilder(Buffer.from(result), {
