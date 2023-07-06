@@ -8,6 +8,6 @@ export const handler: eventHandler<"ready"> = {
     exec: async (bot, client) => {
         console.log(`ready as ${client.user?.tag}`)
         await startBard("1096264729376342016", "852470347907334204", client)
-        await startBing("1081869328250572800", "852470347907334204", client)        
+        //await startBing("1081869328250572800", "852470347907334204", client)        
     }
 }
